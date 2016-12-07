@@ -57,6 +57,10 @@
 				tokenInputId: 'paylane-token',
 				tokenInputName: 'paylane_token',
 
+				shouldHandle: function() {
+					return true;
+				},
+
 				/**
 				 * Custom error handler which allows the merchant to
 				 * handle errors raised by the PayLaneClient class,
@@ -375,7 +379,7 @@
 		// handle the form submission
 		shared.helpers.addEventListener(this.form, 'submit', function(event)
 		{
-			if (!self.config.isCallbackHandlerOverwritten || !self.config.wasResubmitted)
+			if (self.config.shouldHandle() && (!self.config.isCallbackHandlerOverwritten || !self.config.wasResubmitted))
 			{
 				event.preventDefault();
 				self.handleFormSubmit(this);
